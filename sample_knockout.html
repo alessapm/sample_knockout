@@ -12,9 +12,12 @@
    <p>Second String: <input data-bind="value: secondString" /></p>
 
    <p>First String: <strong data-bind="text: firstString">Hi</strong></p>
-   <p>Second String: <strong data-bind="text: secondString">There</strong></p>
+   <p>Second String: <strong data-bind="text: secondString"></strong></p>
 
    <p>Derived String: <strong data-bind="text: thirdString"></strong></p>
+
+    <p>Enter your birth Date: <input type="date" data-bind="value: rawDate" /></p>
+    <p><span data-bind="text: yourAge"></span></p>
 
    <script>
    <!-- This is called "viewmodel". This javascript section defines the data and behavior of UI -->
@@ -26,6 +29,25 @@
        this.thirdString = ko.computed(function() {
        return this.firstString() + " " + this.secondString();
     }, this);
+
+      this.yourAge = ko.observable();
+      let today = new Date();
+      let rawDate = ko.observable();
+
+      // this.rawDate = ko.pureComputed({
+      //    read: function(){
+      //       return this.yourAge;
+      //    },
+      //    write: function(value){
+      //       var b = Date.parse(value);   // convert birth date into milliseconds
+      //       var t = Date.parse(today);   // convert todays date into milliseconds
+      //       diff = t - b;                 // take difference
+      //       var y = Math.floor(diff/31449600000);         // difference is converted into years. 31449600000 milliseconds form a year.
+      //       var m = Math.floor((diff % 31449600000)/604800000/4.3);  //calculating months. 604800000 milliseconds form a week.
+      //     this.yourAge("You are " + y + " year(s) " + m +" months old.");
+      //    },
+      //    owner: this
+      // });
    }
 
    // Activates knockout.js
